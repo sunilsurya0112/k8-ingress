@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app1
+  name: nginx
   # labels of deployment resource
   labels:
     app: app1
@@ -25,7 +25,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: app1
+  name: nginx
 spec:
   selector: # labels are used as selectors
     app: app1
