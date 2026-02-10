@@ -33,3 +33,28 @@ spec:
   - protocol: TCP
     port: 80 # service port
     targetPort: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip 
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:548484840812:certificate/70ac1356-bd80-4dc3-bc2f-78d9d6d35882
+    alb.ingress.kubernetes.io/group.name: sunilmadha996
+spec:
+  ingressClassName: alb
+  rules:
+  - host: "app1.sunil-devops.online"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: app1
+            port:
+              number: 80
